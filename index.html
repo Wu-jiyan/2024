@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: url('https://pic.vjshi.com/2020-12-23/041b44ee54c236f7c442b997e934f45c/online/337a8d9f8a569f88976605b8ea831dae.jpg?x-oss-process=style/resize_w_720') center/cover no-repeat fixed;
+    }
+
+    #current-time {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1.2em;
+      color: #3498db; /* 蓝色的当前时间字体颜色 */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* 蓝色字体阴影 */
+    }
+
+    .countdown-box {
+      display: inline-block;
+      text-align: center;
+      margin: 0 10px;
+    }
+
+    .countdown-number {
+      font-size: 3.5em;
+      color: #00b4cc; /* 蓝色的倒计时数字 */
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* 蓝色字体阴影 */
+    }
+
+    .countdown-title {
+      font-size: 1.5em;
+      color: #cc0000; /* 红色的倒计时标题 */
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* 红色字体阴影 */
+    }
+
+    #title {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #f39c12; /* 橙色的标题字体颜色 */
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8); /* 橙色字体阴影 */
+    }
+
+    .snow-box {
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8); /* 阴影效果 */
+    }
+  </style>
+  <title>2024年新年倒计时</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+</head>
+<body>
+  <div id="aplayer" class="aplayer" data-order="random" data-id="2944021971" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-volume="0.6"></div>
+
+  <div id="current-time"></div>
+  <h2 id="title">2024新年倒计时</h2>
+  <div class="snow-box">
+    <div class="countdown" data-date="2024/2/10 00:00:00">
+      <div class="countdown-box">
+        <h4 class="countdown-number" id="days"></h4>
+        <hr/>
+        <h4 class="countdown-title">天</h4>
+      </div>
+      <div class="countdown-box">
+        <h4 class="countdown-number" id="hours"></h4>
+        <hr/>
+        <h4 class="countdown-title">时</h4>
+      </div>
+      <div class="countdown-box">
+        <h4 class="countdown-number" id="minutes"></h4>
+        <hr/>
+        <h4 class="countdown-title">分</h4>
+      </div>
+      <div class="countdown-box">
+        <h4 class="countdown-number" id="seconds"></h4>
+        <hr/>
+        <h4 class="countdown-title">秒</h4>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateCurrentTime() {
+      const now = new Date();
+      const currentTimeString = `现在时间：${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+      document.getElementById('current-time').innerHTML = currentTimeString;
+    }
+
+    // 目标日期时间：2024年2月10日 00:00:00
+    const targetDate = new Date('2024/2/10 00:00:00').getTime();
+
+    function updateCountdown() {
+      const currentDate = new Date().getTime();
+      const timeDifference = targetDate - currentDate;
+
+      if (timeDifference > 0) {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = days;
+        document.getElementById('hours').innerHTML = hours;
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+      }
+    }
+
+    // 初始调用
+    updateCurrentTime();
+    updateCountdown();
+
+    // 每秒更新一次
+    setInterval(() => {
+      updateCurrentTime();
+      updateCountdown();
+    }, 1000);
+  </script>
+
+  <!-- aplayer -->
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/kaygb/kaygb@master/js/v3.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/kaygb/kaygb@master/layer/layer.js"></script>
+</body>
+</html>
